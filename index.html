@@ -1,274 +1,905 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Beautiful Lily 🌸</title>
-    <!-- Tailwind CSS for styling & responsiveness -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Playfair Display for elegance, Inter for reading -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <!-- FontAwesome for cute icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fdfbf7;
-            overflow-x: hidden;
-        }
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-        /* Custom smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Floating Petals Animation */
-        .petal {
-            position: fixed;
-            top: -10%;
-            pointer-events: none;
-            z-index: 99;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% {
-                top: -10%;
-                transform: translateX(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                top: 110%;
-                transform: translateX(100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        /* Glassmorphism card effect */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Morning, My Love 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --matcha-deep:    #2d4a2d;
+    --matcha-mid:     #4a7c59;
+    --matcha-soft:    #7aab7a;
+    --matcha-pale:    #b8d4b8;
+    --matcha-cream:   #e8f0e0;
+    --matcha-mist:    #f3f7ee;
+    --gold:           #c8a96e;
+    --gold-light:     #e8d4a8;
+    --petal-white:    #fdfcf8;
+    --petal-blush:    #fff8f2;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--matcha-mist);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── SCENE SYSTEM ─── */
+  .scene {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ─── SCENE 1: GOOD MORNING ─── */
+  #scene-gm {
+    background: linear-gradient(160deg, var(--matcha-deep) 0%, #1a2e1a 40%, var(--matcha-mid) 100%);
+    flex-direction: column;
+  }
+
+  .gm-bg-leaves {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .leaf-svg {
+    position: absolute;
+    opacity: 0.08;
+    animation: leafDrift 20s ease-in-out infinite;
+  }
+
+  @keyframes leafDrift {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%       { transform: translateY(-20px) rotate(8deg); }
+  }
+
+  .gm-inner {
+    text-align: center;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .gm-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--matcha-pale);
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .gm-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-style: italic;
+    font-weight: 600;
+    color: var(--petal-white);
+    line-height: 1;
+    opacity: 0;
+    animation: titleReveal 1.4s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
+    position: relative;
+  }
+
+  .gm-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px; left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    animation: lineGrow 1s ease 2s forwards;
+  }
+
+  .gm-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    opacity: 0;
+    animation: fadeUp 1s ease 2.2s forwards;
+    letter-spacing: 0.05em;
+  }
+
+  .gm-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 3.2s forwards;
+    color: var(--matcha-pale);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .scroll-arrow {
+    width: 24px; height: 24px;
+    border-right: 1.5px solid var(--matcha-soft);
+    border-bottom: 1.5px solid var(--matcha-soft);
+    transform: rotate(45deg);
+    animation: bounce 1.8s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50%       { transform: rotate(45deg) translateY(6px); }
+  }
+
+  /* ─── SCENE 2: PHOTO GALLERY ─── */
+  #scene-gallery {
+    background: var(--petal-blush);
+    flex-direction: column;
+    padding: 6rem 2rem;
+    min-height: auto;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--matcha-soft);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-style: italic;
+    color: var(--matcha-deep);
+    margin-bottom: 3.5rem;
+    text-align: center;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  /* First row: big left, two stacked right */
+  .photo-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(45,74,45,0.12), 0 2px 8px rgba(45,74,45,0.08);
+    background: var(--matcha-cream);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+
+  .photo-frame:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(45,74,45,0.2);
+  }
+
+  .photo-frame.large  { grid-column: 1 / 2; grid-row: 1 / 3; aspect-ratio: 3/4; }
+  .photo-frame.medium { grid-column: 2 / 4; grid-row: 1 / 2; aspect-ratio: 16/9; }
+  .photo-frame.small1 { grid-column: 2 / 3; grid-row: 2 / 3; aspect-ratio: 1; }
+  .photo-frame.small2 { grid-column: 3 / 4; grid-row: 2 / 3; aspect-ratio: 1; }
+
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--matcha-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .photo-placeholder svg { opacity: 0.4; }
+
+  .photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.5rem 1rem 1rem;
+    background: linear-gradient(transparent, rgba(45,74,45,0.7));
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .photo-frame:hover .photo-caption { opacity: 1; }
+
+  /* ─── SCENE 3: LETTER ─── */
+  #scene-letter {
+    background: linear-gradient(170deg, var(--matcha-cream) 0%, var(--petal-white) 60%, var(--matcha-mist) 100%);
+    flex-direction: column;
+    padding: 6rem 2rem;
+  }
+
+  .letter-paper {
+    max-width: 640px;
+    width: 100%;
+    background: var(--petal-white);
+    border-radius: 2px;
+    padding: clamp(2.5rem, 6vw, 4.5rem);
+    box-shadow:
+      0 2px 4px rgba(45,74,45,0.06),
+      0 8px 32px rgba(45,74,45,0.10),
+      0 0 0 1px rgba(200,169,110,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .letter-paper::before {
+    content: '';
+    position: absolute;
+    left: 4.5rem; top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(200,169,110,0.25);
+  }
+
+  .letter-lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 31px,
+      rgba(184,212,184,0.2) 31px, rgba(184,212,184,0.2) 32px
+    );
+    background-position: 0 4.5rem;
+    pointer-events: none;
+  }
+
+  .letter-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--matcha-soft);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    padding-left: 5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .letter-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    line-height: 2;
+    color: var(--matcha-deep);
+    padding-left: 5rem;
+    position: relative;
+    z-index: 1;
+    min-height: 12em;
+  }
+
+  .typed-text::after {
+    content: '|';
+    color: var(--matcha-mid);
+    animation: blink 0.8s step-end infinite;
+    font-weight: 300;
+  }
+
+  .typed-text.done::after { display: none; }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .letter-sign {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--matcha-mid);
+    text-align: right;
+    margin-top: 2rem;
+    padding-right: 1rem;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .letter-sign.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── SCENE 4: LILY BOUQUET ─── */
+  #scene-lily {
+    background: linear-gradient(155deg, #1a2e1a 0%, var(--matcha-deep) 50%, #2a3d2a 100%);
+    flex-direction: column;
+    padding: 6rem 2rem;
+    gap: 3rem;
+  }
+
+  .lily-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-style: italic;
+    color: var(--gold-light);
+    text-align: center;
+  }
+
+  .bouquet-svg-wrap {
+    max-width: 480px;
+    width: 100%;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4));
+    animation: floatBouquet 4s ease-in-out infinite;
+  }
+
+  @keyframes floatBouquet {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-12px); }
+  }
+
+  .lily-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--matcha-pale);
+    text-align: center;
+    max-width: 500px;
+    line-height: 1.8;
+  }
+
+  /* Petals falling */
+  .petal {
+    position: absolute;
+    width: 10px; height: 14px;
+    border-radius: 50% 50% 50% 0;
+    background: rgba(255,255,255,0.15);
+    animation: petalFall linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes petalFall {
+    0%   { transform: translateY(-60px) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ─── SCENE 5: MOTIVATION QUOTE ─── */
+  #scene-quote {
+    background: var(--matcha-mist);
+    flex-direction: column;
+    padding: 6rem 2rem;
+    gap: 0;
+  }
+
+  .quote-card {
+    max-width: 700px;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    padding: clamp(3rem, 7vw, 5rem);
+    position: relative;
+    box-shadow:
+      0 4px 6px rgba(45,74,45,0.04),
+      0 20px 80px rgba(45,74,45,0.10);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .quote-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--matcha-soft), var(--gold), var(--matcha-mid));
+  }
+
+  .quote-decorLeaf {
+    position: absolute;
+    right: -30px; top: -30px;
+    width: 180px;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    line-height: 0.5;
+    color: var(--matcha-pale);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--matcha-deep);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .quote-divider {
+    width: 60px; height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  .quote-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--matcha-soft);
+    line-height: 1.7;
+    max-width: 450px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .quote-closing {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--matcha-mid);
+  }
+
+  /* ─── SCROLL TRANSITIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── UTILITIES ─── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+  }
+
+  @keyframes titleReveal {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes lineGrow {
+    to { width: 140px; }
+  }
+
+  .matcha-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--matcha-cream);
+    color: var(--matcha-mid);
+    border: 1px solid var(--matcha-pale);
+    border-radius: 2rem;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    font-family: 'DM Sans', sans-serif;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .photo-frame.large  { grid-column: 1 / 3; grid-row: 1 / 2; aspect-ratio: 4/3; }
+    .photo-frame.medium { grid-column: 1 / 3; grid-row: 2 / 3; }
+    .photo-frame.small1 { grid-column: 1 / 2; grid-row: 3 / 4; }
+    .photo-frame.small2 { grid-column: 2 / 3; grid-row: 3 / 4; }
+    .letter-paper::before { display: none; }
+    .letter-body, .letter-date { padding-left: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
 </head>
-<body class="text-stone-800">
+<body>
 
-    <!-- Floating Petals Container -->
-    <div id="petal-container"></div>
+<!-- ═══════════════════════════════ SCENE 1: GOOD MORNING ═══════════════════════════════ -->
+<section class="scene" id="scene-gm">
+  <div class="gm-bg-leaves" aria-hidden="true" id="bgLeaves"></div>
 
-    <!-- 1. HERO SECTION -->
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative bg-gradient-to-b from-rose-50 via-amber-50/30 to-fdfbf7">
-        <div class="animate-fade-in space-y-6 max-w-2xl">
-            <span class="text-xs uppercase tracking-widest text-amber-700 font-medium bg-amber-100/60 px-3 py-1 rounded-full">A Digital Love Letter</span>
-            <h1 class="text-4xl md:text-6xl font-serif italic text-rose-900 leading-tight">
-                To My Beautiful Lily
-            </h1>
-            <p class="text-sm md:text-base text-stone-600 font-light max-w-md mx-auto leading-relaxed">
-                Like your favorite flower, awak sentiasa cantik. Tiap hari tengok mira setiap kali lah excited. Tak tahula kenapa saya obses sangat dengan Amira. Cantik selalu Amira Nabila
-            </p>
-            <div class="pt-4">
-                <a href="#promises" class="inline-block bg-rose-900 text-white text-xs tracking-wider uppercase font-medium px-6 py-3 rounded-full shadow-md hover:bg-rose-800 transition duration-300">
-                    Tekan sini <i class="fas fa-chevron-down ml-2 text-[10px]"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+  <div class="gm-inner">
+    <p class="gm-eyebrow">A morning just for you</p>
+    <h1 class="gm-title">Good Morning</h1>
+    <p class="gm-sub">Open your eyes, beautiful. Today is yours.</p>
+  </div>
 
-    <!-- 2. MY PROMISES (Appreciation, Missing Her, Loyalty) -->
-    <section id="promises" class="py-20 px-4 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-serif text-stone-900">My Promises to You</h2>
-            <div class="w-12 h-[1px] bg-amber-600 mx-auto mt-4"></div>
-        </div>
+  <div class="gm-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
 
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Appreciation -->
-            <div class="glass-card p-8 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border-t-4 border-rose-400">
-                <div class="text-rose-400 text-2xl mb-4"><i class="fas fa-heart"></i></div>
-                <h3 class="text-xl font-serif mb-3 text-stone-900">Deep Appreciation</h3>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    Thank you for being my safe haven. Terima kasih sebab layan is. Kita tak expect pun boleh rapat dengan Amira macam sekarang. Sumpah dia macam mimpi. Thank you sebab dulu Amira reply story kita. Masatu saya happy plus excited + takut jugak HAHAHHAH.
-                </p>
-            </div>
+<!-- ═══════════════════════════════ SCENE 2: GALLERY ═══════════════════════════════ -->
+<section class="scene" id="scene-gallery" style="min-height: auto;">
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:960px;">
 
-            <!-- Missing Her & Waiting -->
-            <div class="glass-card p-8 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border-t-4 border-amber-400">
-                <div class="text-amber-500 text-2xl mb-4"><i class="fas fa-hourglass-half"></i></div>
-                <h3 class="text-xl font-serif mb-3 text-stone-900">I Will Wait For You</h3>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    Saya janji saya tunggu Amira tau. Kita janji jaga hati. HEHEHEH sorry sebab asyik ulang benda sama, tapi haa i mean it tau. Kita tak main main. Mira target kita. Is harap mira pun jaga hati tau walaupun kita takde dpn mata Amira.
-                </p>
-            </div>
+    <p class="section-label reveal">Cantik</p>
+    <h2 class="section-title reveal">A few frames of cantik saya 🌿</h2>
 
-            <!-- Loyalty -->
-            <div class="glass-card p-8 rounded-2xl shadow-sm hover:shadow-md transition duration-300 border-t-4 border-stone-400">
-                <div class="text-stone-500 text-2xl mb-4"><i class="fas fa-shield-heart"></i></div>
-                <h3 class="text-xl font-serif mb-3 text-stone-900">Unwavering Loyalty</h3>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    Amira jangan bimbang, kita janji setia. Kita sama sama usaha ada jodoh tau. Takdir kita takleh tentukan tapi jodoh boleh diusahan. Tak sabar nak bela kucing, tanam pokok lily, buat kek sama sama HMM. HAIH berangan betul kan Is ni. HMM... tapi betul tak sabar... tapi boleh je sabar... kan janji nk tunggu Mira. HEHEHHE    
-                </p>
-            </div>
-        </div>
-    </section>
+    <div class="gallery-grid">
 
-    <!-- 3. THE LILY & HER BEAUTY (Interactive Feature) -->
-    <section class="py-20 bg-rose-50/50 px-4">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            <div class="w-full md:w-1/2 space-y-6">
-                <span class="text-xs uppercase tracking-widest text-rose-700 font-medium">The Meaning of the Lily</span>
-                <h2 class="text-3xl md:text-4xl font-serif text-stone-900">Why You Are My Lily</h2>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    White lilies symbolize **purity, devotion, and a majestic beauty**. To me, that is exactly who you are. 
-                </p>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    Pilih tema lily sebab mira punya favourite flower. Dulu ingat lagi mase first time Is nak bagi bunga dekat Amira, kita banyak bende fikir, tapi YEAYYYY mira terima laa bunga kita. Haa tekan kat bawah ni kenapa Lily dkt dngn Mira,,, tpi bila tekan tu ayat GPT laa HEHEHEHE,,, kita tak pandai buat ayat.
-                </p>
-                
-                <!-- Interactive Buttons -->
-                <div class="flex flex-wrap gap-2 pt-2">
-                    <button onclick="revealTrait('grace')" class="bg-white hover:bg-rose-900 hover:text-white border border-stone-200 text-xs px-4 py-2 rounded-full transition duration-300 focus:outline-none">Her Grace</button>
-                    <button onclick="revealTrait('purity')" class="bg-white hover:bg-rose-900 hover:text-white border border-stone-200 text-xs px-4 py-2 rounded-full transition duration-300 focus:outline-none">Her Pure Soul</button>
-                    <button onclick="revealTrait('radiance')" class="bg-white hover:bg-rose-900 hover:text-white border border-stone-200 text-xs px-4 py-2 rounded-full transition duration-300 focus:outline-none">Her Radiance</button>
+      <!-- LARGE FRAME -->
+      <div class="photo-frame large reveal" style="transition-delay:0.1s">
+        <!-- 💡 Replace the div below with: <img src="your-photo.jpg" alt="caption"> -->
+        <div class="photo-placeholder" style="min-height:310px;">
+          <img src="photo_6.jpg" alt="Gambar paling cantik dan comel"
+          <span>Comel gila awak ni</span>
                 </div>
-                
-                <!-- Trait Display Text Box -->
-                <div id="trait-box" class="p-4 bg-white/80 border border-rose-100 rounded-xl min-h-[70px] flex items-center text-sm font-light text-stone-700 italic">
-                    Click a trait above to see why she is a true lily...
-                </div>
-            </div>
-            
-            <!-- Graphic/Image Holder -->
-            <div class="w-full md:w-1/2 flex justify-center">
-                <div class="relative w-72 h-72 rounded-full bg-gradient-to-tr from-rose-200 to-amber-100 flex items-center justify-center shadow-inner">
-                    <!-- Icon placeholder for a elegant flower look -->
-                    <i class="fa-solid fa-seedling text-6xl text-rose-900/60 animate-pulse"></i>
-                    <!-- Feel free to swap this icon out with an actual beautiful illustration or SVG of a Lily! -->
-                </div>
-            </div>
+        <div class="photo-caption">My favourite smile ✨</div>
+      </div>
+
+      <!-- WIDE FRAME -->
+      <div class="photo-frame medium reveal" style="transition-delay:0.2s">
+        <div class="photo-placeholder" style="min-height:250px;">
+          <img src="photo_3.jpg" alt="Gambar paling cantik dan comel">
+          <span>A beautiful smile</span>
         </div>
-    </section>
+        <div class="photo-caption">That smile I'll never forget 🌸</div>
+      </div>
 
-    <!-- 4. PHOTO GALLERY -->
-    <section class="py-20 px-4 max-w-5xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-serif text-stone-900">Our Favorite Moments</h2>
-            <p class="text-xs text-stone-500 font-light mt-2">A small glimpse of the memories I hold closest to my heart.</p>
-            <div class="w-12 h-[1px] bg-amber-600 mx-auto mt-4"></div>
+      <!-- SMALL 1 -->
+      <div class="photo-frame small1 reveal" style="transition-delay:0.3s">
+        <div class="photo-placeholder" style="min-height:180px;">
+          <img src="photo_2.jpg" alt="Gambar paling cantik dan comel">
+          <span>Awak nampak cantik gila pakai spek ni</span>
         </div>
+        <div class="photo-caption">Forever this 💚</div>
+      </div>
 
-        <!-- Responsive Grid Gallery -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <!-- Photo 1 -->
-            <div class="overflow-hidden rounded-xl bg-stone-100 aspect-[3/4] relative group shadow-sm">
-                <!-- Replace 'https://via.placeholder.com/600x800' with your actual image links! -->
-                <img src="bunga.jpg" alt="Memory 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                    <p class="text-white text-xs font-light">That beautiful smile ✨</p>
-                </div>
-            </div>
-            <!-- Photo 2 -->
-            <div class="overflow-hidden rounded-xl bg-stone-100 aspect-[3/4] relative group shadow-sm">
-                <img src="miracantik1.jpg" alt="Memory 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                    <p class="text-white text-xs font-light">My absolute favorite person 🤍</p>
-                </div>
-            </div>
-            <!-- Photo 3 -->
-            <div class="overflow-hidden rounded-xl bg-stone-100 aspect-[3/4] relative group shadow-sm col-span-2 md:col-span-1">
-                <img src="ourhirono.jpg" alt="Memory 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                    <p class="text-white text-xs font-light">Forever looking forward to more dates 🥂</p>
-                </div>
-            </div>
+      <!-- SMALL 2 -->
+      <div class="photo-frame small2 reveal" style="transition-delay:0.4s">
+        <div class="photo-placeholder" style="min-height:180px;">
+          <img src="photo_1.jpg" alt="Gambar paling cantik dan comel">
+          <span>Cantik saya - Amira</span>
         </div>
-    </section>
+        <div class="photo-caption">Gambar ss sorry🌿</div>
+      </div>
 
-    <!-- 5. EXAM MOTIVATION SECTION -->
-    <section class="py-20 bg-gradient-to-b from-fdfbf7 to-amber-50/50 px-4">
-        <div class="max-w-3xl mx-auto glass-card rounded-3xl p-8 md:p-12 shadow-md text-center border border-amber-100 relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-4 text-amber-200/40 text-7xl font-serif">“</div>
-            
-            <span class="text-xs uppercase tracking-widest text-amber-800 font-medium bg-amber-100 px-3 py-1 rounded-full">Ace Your Exams!</span>
-            <h2 class="text-3xl font-serif text-stone-900 mt-4 mb-6">You've Got This, My Brilliant Girl!</h2>
-            
-            <p class="text-sm md:text-base text-stone-600 font-light leading-relaxed max-w-xl mx-auto mb-8">
-                I know you are working incredibly hard for your exams right now. It can feel overwhelming, but please remember how capable, smart, and resilient you are. Don't stress too much—your worth is not measured by a test paper, but I know you're going to absolutely crush it anyway!
-            </p>
+    </div>
+  </div>
+</section>
 
-            <!-- Dynamic Motivational Quotes Generator -->
-            <div class="bg-white/80 p-6 rounded-2xl border border-dashed border-stone-200 max-w-lg mx-auto">
-                <p id="quote-display" class="text-sm font-medium text-rose-900 italic">"Take a deep breath. You are smarter than you think, and stronger than you feel."</p>
-                <button onclick="generateQuote()" class="mt-4 text-[11px] uppercase tracking-wider text-stone-500 hover:text-rose-900 font-semibold transition">
-                    <i class="fas fa-rotate-right mr-1"></i> Click for another reminder
-                </button>
-            </div>
-        </div>
-    </section>
+<!-- ═══════════════════════════════ SCENE 3: LETTER ═══════════════════════════════ -->
+<section class="scene" id="scene-letter" style="min-height: auto;">
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:700px;">
 
-    <!-- FOOTER -->
-    <footer class="py-8 text-center text-xs text-stone-400 font-light border-t border-stone-100">
-        <p>Made with love by your biggest fan ❤️</p>
-    </footer>
+    <p class="section-label reveal">Written just for you</p>
+    <h2 class="section-title reveal" style="margin-bottom:2.5rem;">A little letter 🌱</h2>
 
-    <!-- INTERACTIVE JAVASCRIPT -->
-    <script>
-        // 1. Lily Trait Switcher Logic
-        function revealTrait(trait) {
-            const box = document.getElementById('trait-box');
-            let text = "";
-            
-            if(trait === 'grace') {
-                text = "✨ **Her Grace:** Just like a lily sways flawlessly in the breeze, your poise, gentle behavior, and calmness make my heart skip a beat every day.";
-            } else if(trait === 'purity') {
-                text = "🤍 **Her Pure Soul:** Lilies represent an untainted spirit. Your innocence, genuine kindness, and true heart are rare treasures I promise to protect forever.";
-            } else if(trait === 'radiance') {
-                text = "🌸 **Her Radiance:** A lily stands out gracefully in any garden, drawing admiration. Your beauty shines from the inside out, lighting up any room you walk into.";
-            }
-            
-            box.innerHTML = text;
-            box.classList.add('bg-rose-50/50');
-            setTimeout(() => box.classList.remove('bg-rose-50/50'), 300);
-        }
+    <div class="letter-paper reveal" id="letterPaper">
+      <div class="letter-lines" aria-hidden="true"></div>
 
-        // 2. Exam Motivation Quote Array
-        const quotes = [
-            "\"Goodluck exam .\"",
-            "\"Ganbatte!\"",
-            "\"Kita percaya nanti mira dapat 4 flat.\"",
-            "\"Ada rezeki kita jumpa lagi.\"",
-            "\"Saya rindu awak sangat sangat, sebabtu buat ni 🤍!\""
-        ];
+      <p class="letter-date" id="letterDate"></p>
 
-        function generateQuote() {
-            const display = document.getElementById('quote-display');
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            display.innerText = quotes[randomIndex];
-        }
+      <div class="letter-body">
+        <span class="typed-text" id="typedLetter"></span>
+      </div>
 
-        // 3. Falling Petals Generator
-        function createPetal() {
-            const container = document.getElementById('petal-container');
-            const petal = document.createElement('div');
-            
-            // Using a simple heart/petal styling
-            petal.classList.add('petal');
-            petal.innerHTML = '🌸'; 
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4-7 seconds
-            petal.style.fontSize = Math.random() * 10 + 12 + 'px'; // 12px - 22px
-            petal.style.opacity = Math.random() * 0.5 + 0.3; // subtle opacity
-            
-            container.appendChild(petal);
-            
-            // Remove petal after animation finishes
-            setTimeout(() => {
-                petal.remove();
-            }, 7000);
-        }
+      <p class="letter-sign" id="letterSign">With all my love 🌿</p>
+    </div>
+  </div>
+</section>
 
-        // Create a new falling petal every 600ms
-        setInterval(createPetal, 600);
-    </script>
+<!-- ═══════════════════════════════ SCENE 4: LILY BOUQUET ═══════════════════════════════ -->
+<section class="scene" id="scene-lily">
+  <!-- Falling petals injected by JS -->
+
+  <h2 class="lily-title reveal">These are for you, love 🤍</h2>
+
+  <div class="bouquet-svg-wrap reveal" style="transition-delay:0.2s">
+    <svg viewBox="0 0 480 560" xmlns="http://www.w3.org/2000/svg" width="100%">
+
+      <!-- Ribbon / wrap -->
+      <path d="M200 480 Q240 510 280 480 L300 540 Q240 560 180 540 Z" fill="#c8a96e" opacity="0.9"/>
+      <path d="M220 500 Q240 515 260 500 L265 530 Q240 540 215 530 Z" fill="#e8d4a8" opacity="0.6"/>
+
+      <!-- STEMS -->
+      <path d="M240 480 Q238 400 235 300" stroke="#4a7c59" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M240 480 Q250 420 260 340" stroke="#4a7c59" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M240 480 Q225 410 215 310" stroke="#4a7c59" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M240 480 Q265 430 275 360" stroke="#5a8c69" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M240 480 Q218 440 205 380" stroke="#5a8c69" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+      <!-- LEAVES -->
+      <ellipse cx="248" cy="390" rx="22" ry="9" fill="#4a7c59" transform="rotate(-30 248 390)" opacity="0.9"/>
+      <ellipse cx="228" cy="360" rx="18" ry="7" fill="#5a8c69" transform="rotate(20 228 360)" opacity="0.85"/>
+      <ellipse cx="262" cy="420" rx="20" ry="8" fill="#3d6b4a" transform="rotate(-50 262 420)" opacity="0.9"/>
+      <ellipse cx="215" cy="440" rx="16" ry="6" fill="#5a8c69" transform="rotate(40 215 440)" opacity="0.8"/>
+
+      <!-- ─── LILY 1 (center, upright) ─── -->
+      <!-- 6 petals around center -->
+      <g transform="translate(235, 280)">
+        <!-- petals -->
+        <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(300)"/>
+        <!-- center detail -->
+        <circle cx="0" cy="0" r="10" fill="#f5e6b0"/>
+        <!-- stamens -->
+        <line x1="0" y1="0" x2="0" y2="-20" stroke="#c8a96e" stroke-width="1.5"/>
+        <line x1="0" y1="0" x2="17" y2="-10" stroke="#c8a96e" stroke-width="1.5"/>
+        <line x1="0" y1="0" x2="17" y2="10" stroke="#c8a96e" stroke-width="1.5"/>
+        <line x1="0" y1="0" x2="0" y2="20" stroke="#c8a96e" stroke-width="1.5"/>
+        <line x1="0" y1="0" x2="-17" y2="10" stroke="#c8a96e" stroke-width="1.5"/>
+        <line x1="0" y1="0" x2="-17" y2="-10" stroke="#c8a96e" stroke-width="1.5"/>
+        <!-- pollen tips -->
+        <circle cx="0" cy="-22" r="3" fill="#e8b84b"/>
+        <circle cx="19" cy="-11" r="3" fill="#e8b84b"/>
+        <circle cx="19" cy="11" r="3" fill="#e8b84b"/>
+        <circle cx="0" cy="22" r="3" fill="#e8b84b"/>
+        <circle cx="-19" cy="11" r="3" fill="#e8b84b"/>
+        <circle cx="-19" cy="-11" r="3" fill="#e8b84b"/>
+        <!-- petal veins -->
+        <path d="M0 0 Q0 -30 0 -60" stroke="rgba(180,210,180,0.4)" stroke-width="0.8" fill="none"/>
+        <path d="M0 0 Q17 -17 35 -35" stroke="rgba(180,210,180,0.4)" stroke-width="0.8" fill="none" transform="rotate(60)"/>
+      </g>
+
+      <!-- ─── LILY 2 (right, angled) ─── -->
+      <g transform="translate(268, 330) rotate(-20)">
+        <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(300)"/>
+        <circle cx="0" cy="0" r="8" fill="#f5e6b0"/>
+        <line x1="0" y1="0" x2="0" y2="-18" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="15" y2="-9" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="15" y2="9" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="0" y2="18" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-15" y2="9" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-15" y2="-9" stroke="#c8a96e" stroke-width="1.2"/>
+        <circle cx="0" cy="-19" r="2.5" fill="#e8b84b"/>
+        <circle cx="16" cy="-10" r="2.5" fill="#e8b84b"/>
+        <circle cx="16" cy="10" r="2.5" fill="#e8b84b"/>
+        <circle cx="0" cy="19" r="2.5" fill="#e8b84b"/>
+        <circle cx="-16" cy="10" r="2.5" fill="#e8b84b"/>
+        <circle cx="-16" cy="-10" r="2.5" fill="#e8b84b"/>
+      </g>
+
+      <!-- ─── LILY 3 (left, angled) ─── -->
+      <g transform="translate(208, 295) rotate(15)">
+        <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(300)"/>
+        <circle cx="0" cy="0" r="8" fill="#f5e6b0"/>
+        <line x1="0" y1="0" x2="0" y2="-16" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="14" y2="-8" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="14" y2="8" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="0" y2="16" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-14" y2="8" stroke="#c8a96e" stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-14" y2="-8" stroke="#c8a96e" stroke-width="1.2"/>
+        <circle cx="0" cy="-17" r="2.5" fill="#e8b84b"/>
+        <circle cx="15" cy="-9" r="2.5" fill="#e8b84b"/>
+        <circle cx="15" cy="9" r="2.5" fill="#e8b84b"/>
+        <circle cx="0" cy="17" r="2.5" fill="#e8b84b"/>
+        <circle cx="-15" cy="9" r="2.5" fill="#e8b84b"/>
+        <circle cx="-15" cy="-9" r="2.5" fill="#e8b84b"/>
+      </g>
+
+      <!-- ─── BUD 1 ─── -->
+      <g transform="translate(276, 350)">
+        <ellipse cx="0" cy="-15" rx="6" ry="16" fill="white" opacity="0.85"/>
+        <ellipse cx="-5" cy="-12" rx="5" ry="13" fill="white" opacity="0.7" transform="rotate(-15)"/>
+        <ellipse cx="5" cy="-12" rx="5" ry="13" fill="white" opacity="0.7" transform="rotate(15)"/>
+        <ellipse cx="0" cy="-5" rx="8" ry="4" fill="#b8d4b8" opacity="0.5"/>
+      </g>
+
+      <!-- ─── BUD 2 ─── -->
+      <g transform="translate(203, 370)">
+        <ellipse cx="0" cy="-12" rx="5" ry="13" fill="white" opacity="0.8"/>
+        <ellipse cx="-4" cy="-10" rx="4" ry="11" fill="white" opacity="0.65" transform="rotate(-12)"/>
+        <ellipse cx="4" cy="-10" rx="4" ry="11" fill="white" opacity="0.65" transform="rotate(12)"/>
+        <ellipse cx="0" cy="-4" rx="6" ry="3.5" fill="#b8d4b8" opacity="0.5"/>
+      </g>
+
+      <!-- Sparkles -->
+      <circle cx="180" cy="250" r="2" fill="#e8d4a8" opacity="0.7"><animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.5s" repeatCount="indefinite"/></circle>
+      <circle cx="300" cy="230" r="1.5" fill="#e8d4a8" opacity="0.6"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="3.2s" repeatCount="indefinite"/></circle>
+      <circle cx="155" cy="320" r="1.5" fill="white" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.8s" repeatCount="indefinite"/></circle>
+      <circle cx="320" cy="300" r="2" fill="white" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+    </svg>
+  </div>
+
+  <p class="lily-note reveal" style="transition-delay:0.3s">
+    White lilies — for your purity, your beauty,<br>and everything that makes you <em>you</em>.
+  </p>
+</section>
+
+<!-- ═══════════════════════════════ SCENE 5: QUOTE ═══════════════════════════════ -->
+<section class="scene" id="scene-quote" style="min-height: auto; padding: 6rem 2rem 8rem;">
+
+  <div class="quote-card reveal">
+    <!-- decorative leaf -->
+    <svg class="quote-decorLeaf" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 180 Q60 20 190 10 Q80 80 10 180Z" fill="#4a7c59"/>
+    </svg>
+
+    <span class="quote-mark">"</span>
+
+    <p class="quote-text">
+      I know your tummy isn't feeling its best right now, but don't let this little pain steal your smile.
+      Rest, stay hydrated, and let your body heal.
+      You're stronger than you think, and I'll be cheering for you every step of the way.
+      I can't wait to see you smiling and feeling like yourself again. ❤️
+    </p>
+
+    <div class="quote-divider"></div>
+
+    <p class="quote-sub">
+      Hope to see you Amira Nabila binti Mohd Najib, my beautiful, kind, manis, ayu girl
+    </p>
+
+    <span class="matcha-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      Just for you
+    </span>
+
+    <p class="quote-closing" style="margin-top:2rem;">
+      — Your biggest fan, always 🌿
+    </p>
+  </div>
+
+</section>
+
+<script>
+// ─── BACKGROUND LEAVES ───
+(function() {
+  const container = document.getElementById('bgLeaves');
+  const leafPath = `<svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg"><path d="M30 5 Q55 30 50 65 Q30 95 10 65 Q5 30 30 5Z" fill="#7aab7a"/><line x1="30" y1="5" x2="30" y2="95" stroke="#4a7c59" stroke-width="1.5" opacity="0.5"/></svg>`;
+  const positions = [
+    {top:5,left:8,size:180,delay:0},{top:15,right:5,size:140,delay:3},
+    {top:40,left:2,size:220,delay:7},{bottom:10,right:10,size:160,delay:5},
+    {bottom:20,left:20,size:120,delay:9},{top:60,right:20,size:200,delay:2},
+    {top:30,left:40,size:100,delay:11},{bottom:40,left:5,size:140,delay:6},
+  ];
+  positions.forEach(({top,bottom,left,right,size,delay}) => {
+    const div = document.createElement('div');
+    div.className = 'leaf-svg';
+    div.style.cssText = [
+      top    !== undefined ? `top:${top}%`    : '',
+      bottom !== undefined ? `bottom:${bottom}%` : '',
+      left   !== undefined ? `left:${left}%`  : '',
+      right  !== undefined ? `right:${right}%` : '',
+      `width:${size}px`,
+      `animation-delay:${delay}s`,
+      `animation-duration:${18+delay}s`
+    ].filter(Boolean).join(';');
+    div.innerHTML = leafPath;
+    container.appendChild(div);
+  });
+})();
+
+// ─── FALLING PETALS ───
+(function() {
+  const scene = document.getElementById('scene-lily');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const hue = 120 + Math.random() * 30;
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${6+Math.random()*8}px;
+      height:${8+Math.random()*10}px;
+      background:hsla(${hue},40%,85%,0.25);
+      animation-duration:${6+Math.random()*10}s;
+      animation-delay:${Math.random()*8}s;
+      border-radius:${Math.random()>0.5?'50% 50% 50% 0':'50% 0 50% 50%'};
+    `;
+    scene.appendChild(p);
+  }
+})();
+
+// ─── INTERSECTION OBSERVER for .reveal ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── LETTER DATE ───
+const dateEl = document.getElementById('letterDate');
+const now = new Date();
+dateEl.textContent = now.toLocaleDateString('en-US', {
+  weekday:'long', year:'numeric', month:'long', day:'numeric'
+});
+
+// ─── TYPEWRITER ───
+const letterText = [
+  "Hai my cantik,\n\n",
+  "Hope your day become as shine as you are — ",
+  "the way you laugh, happy, hope your mood will gradually become okay ",
+  "after you read this letter HEHHEH :). ",
+  "I am very lucky to have you sayangg.\n\n",
+  "Sorry pasal semalam ye amira,  ",
+  "Saya nak gurau dengan sayang saya je HEHHEHE. ",
+  "Kalau sakit perut sangat kan, orang cakap kene cari bnde yang manis macam amira. ",
+  "Nanti pi laa cari dessert ke buat diri awak happy HAHAHHAHA. \n\n",
+  "Kalau pape roro je saya, mesej ke sbb ",
+  "I am here — always — to hold space for you, ",
+  "to listen, to remind you how wonderful you are ",
+  "when you forget.\n\n",
+  "This morning is yours. ",
+  "Take it gently. 🌿"
+].join('');
+
+let typedIndex = 0;
+const typedEl = document.getElementById('typedLetter');
+const signEl = document.getElementById('letterSign');
+const letterPaper = document.getElementById('letterPaper');
+
+let typingStarted = false;
+
+function typeNext() {
+  if (typedIndex < letterText.length) {
+    const char = letterText[typedIndex];
+    if (char === '\n') {
+      typedEl.innerHTML += '<br>';
+    } else {
+      typedEl.innerHTML += char;
+    }
+    typedIndex++;
+    const delay = char === '.' || char === '!' || char === '?' ? 280 :
+                  char === ',' ? 120 :
+                  char === '\n' ? 200 :
+                  35 + Math.random() * 30;
+    setTimeout(typeNext, delay);
+  } else {
+    typedEl.classList.add('done');
+    signEl.classList.add('visible');
+  }
+}
+
+const letterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !typingStarted) {
+      typingStarted = true;
+      setTimeout(typeNext, 600);
+    }
+  });
+}, { threshold: 0.3 });
+
+letterObserver.observe(letterPaper);
+</script>
+
 </body>
 </html>
