@@ -61,7 +61,7 @@
 
   @keyframes leafDrift {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50%       { transform: translateY(-20px) rotate(8deg); }
+    50%      { transform: translateY(-20px) rotate(8deg); }
   }
 
   .gm-inner {
@@ -142,7 +142,7 @@
 
   @keyframes bounce {
     0%, 100% { transform: rotate(45deg) translateY(0); }
-    50%       { transform: rotate(45deg) translateY(6px); }
+    50%      { transform: rotate(45deg) translateY(6px); }
   }
 
   /* ─── SCENE 2: PHOTO GALLERY ─── */
@@ -174,13 +174,11 @@
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
     gap: 1rem;
     max-width: 900px;
     width: 100%;
   }
 
-  /* First row: big left, two stacked right */
   .photo-frame {
     position: relative;
     overflow: hidden;
@@ -189,6 +187,8 @@
     background: var(--matcha-cream);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
+    height: 100%; /* Added so frames dynamically fill any remaining gap in their row */
+    width: 100%;
   }
 
   .photo-frame:hover {
@@ -196,47 +196,34 @@
     box-shadow: 0 16px 48px rgba(45,74,45,0.2);
   }
 
-  .photo-frame.large  { grid-column: 1 / 2; grid-row: 1 / 3; aspect-ratio: 3/4; }
-  .photo-frame.medium { grid-column: 2 / 4; grid-row: 1 / 2; aspect-ratio: 16/9; }
-  .photo-frame.small1 { grid-column: 2 / 3; grid-row: 2 / 3; aspect-ratio: 1; }
-  .photo-frame.small2 { grid-column: 3 / 4; grid-row: 2 / 3; aspect-ratio: 1; }
-
-  .photo-placeholder {
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: var(--matcha-soft);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    padding: 1.5rem;
-    text-align: center;
-  }
-
-  .photo-placeholder svg { opacity: 0.4; }
-
   .photo-frame img {
-    width: 100%; height: 100%;
+    width: 100%; 
+    height: 100%;
     object-fit: cover;
     display: block;
   }
 
+  /* Desktop Grid Placement - Perfectly balanced into 2 Rows to eliminate all white space */
+  .photo-frame.large  { grid-column: 1 / 2; grid-row: 1 / 2; aspect-ratio: 3/4; }
+  .photo-frame.medium { grid-column: 2 / 4; grid-row: 1 / 2; }
+  .photo-frame.flower { grid-column: 1 / 2; grid-row: 2 / 3; aspect-ratio: 3/4; }
+  .photo-frame.small1 { grid-column: 2 / 3; grid-row: 2 / 3; }
+  .photo-frame.small2 { grid-column: 3 / 4; grid-row: 2 / 3; }
+
   .photo-caption {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    padding: 1.5rem 1rem 1rem;
-    background: linear-gradient(transparent, rgba(45,74,45,0.7));
+    padding: 2.5rem 1rem 1rem;
+    background: linear-gradient(transparent, rgba(45,74,45,0.85));
     color: white;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 0.9rem;
-    opacity: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    opacity: 1;
     transition: opacity 0.3s ease;
   }
-
+  
   .photo-frame:hover .photo-caption { opacity: 1; }
 
   /* ─── SCENE 3: LETTER ─── */
@@ -356,7 +343,7 @@
 
   @keyframes floatBouquet {
     0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-12px); }
+    50%      { transform: translateY(-12px); }
   }
 
   .lily-note {
@@ -504,15 +491,17 @@
     text-transform: uppercase;
   }
 
+  /* ─── MOBILE RESPONSIVE UPDATES ─── */
   @media (max-width: 600px) {
     .gallery-grid {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto auto;
     }
-    .photo-frame.large  { grid-column: 1 / 3; grid-row: 1 / 2; aspect-ratio: 4/3; }
-    .photo-frame.medium { grid-column: 1 / 3; grid-row: 2 / 3; }
-    .photo-frame.small1 { grid-column: 1 / 2; grid-row: 3 / 4; }
-    .photo-frame.small2 { grid-column: 2 / 3; grid-row: 3 / 4; }
+    .photo-frame.large  { grid-column: 1 / 3; grid-row: 1 / 2; aspect-ratio: 3/4; }
+    .photo-frame.medium { grid-column: 1 / 3; grid-row: 2 / 3; aspect-ratio: 16/9; }
+    .photo-frame.flower { grid-column: 1 / 3; grid-row: 3 / 4; aspect-ratio: 3/4; }
+    .photo-frame.small1 { grid-column: 1 / 2; grid-row: 4 / 5; aspect-ratio: 1; }
+    .photo-frame.small2 { grid-column: 2 / 3; grid-row: 4 / 5; aspect-ratio: 1; }
+    
     .letter-paper::before { display: none; }
     .letter-body, .letter-date { padding-left: 0; }
   }
@@ -524,7 +513,6 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════ SCENE 1: GOOD MORNING ═══════════════════════════════ -->
 <section class="scene" id="scene-gm">
   <div class="gm-bg-leaves" aria-hidden="true" id="bgLeaves"></div>
 
@@ -540,7 +528,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SCENE 2: GALLERY ═══════════════════════════════ -->
 <section class="scene" id="scene-gallery" style="min-height: auto;">
   <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:960px;">
 
@@ -549,48 +536,49 @@
 
     <div class="gallery-grid">
 
-      <!-- LARGE FRAME -->
       <div class="photo-frame large reveal" style="transition-delay:0.1s">
-        <!-- 💡 Replace the div below with: <img src="your-photo.jpg" alt="caption"> -->
-        <div class="photo-placeholder" style="min-height:310px;">
-          <img src="photo_6.jpg" alt="Gambar paling cantik dan comel"
-          <span>Comel gila awak ni</span>
-                </div>
-        <div class="photo-caption">My favourite smile ✨</div>
+        <img src="photo_6.jpg" alt="Gambar paling cantik dan comel">
+        <div class="photo-caption">
+          <strong>Comel gila awak ni</strong><br>
+          My favourite smile ✨
+        </div>
       </div>
 
-      <!-- WIDE FRAME -->
       <div class="photo-frame medium reveal" style="transition-delay:0.2s">
-        <div class="photo-placeholder" style="min-height:250px;">
-          <img src="photo_3.jpg" alt="Gambar paling cantik dan comel">
-          <span>A beautiful smile</span>
+        <img src="photo_3.jpg" alt="Gambar paling cantik dan comel">
+        <div class="photo-caption">
+          <strong>A beautiful smile</strong><br>
+          That smile I'll never forget 🌸
         </div>
-        <div class="photo-caption">That smile I'll never forget 🌸</div>
       </div>
 
-      <!-- SMALL 1 -->
       <div class="photo-frame small1 reveal" style="transition-delay:0.3s">
-        <div class="photo-placeholder" style="min-height:180px;">
-          <img src="photo_2.jpg" alt="Gambar paling cantik dan comel">
-          <span>Awak nampak cantik gila pakai spek ni</span>
+        <img src="photo_2.jpg" alt="Gambar paling cantik dan comel">
+        <div class="photo-caption">
+          <span style="font-size: 0.9em;">Awak nampak cantik gila pakai spek ni</span><br>
+          Forever this 💚
         </div>
-        <div class="photo-caption">Forever this 💚</div>
       </div>
 
-      <!-- SMALL 2 -->
       <div class="photo-frame small2 reveal" style="transition-delay:0.4s">
-        <div class="photo-placeholder" style="min-height:180px;">
-          <img src="photo_1.jpg" alt="Gambar paling cantik dan comel">
-          <span>Cantik saya - Amira</span>
+        <img src="photo_1.jpg" alt="Gambar paling cantik dan comel">
+        <div class="photo-caption">
+          Cantik saya - Amira<br>
+          <span style="font-size: 0.85em;">Gambar ss sorry🌿</span>
         </div>
-        <div class="photo-caption">Gambar ss sorry🌿</div>
+      </div>
+
+      <div class="photo-frame flower reveal" style="transition-delay:0.5s">
+        <img src="bunga.jpg" alt="Flowers">
+        <div class="photo-caption">
+          These flowers are for you 🌸
+        </div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SCENE 3: LETTER ═══════════════════════════════ -->
 <section class="scene" id="scene-letter" style="min-height: auto;">
   <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:700px;">
 
@@ -611,64 +599,50 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SCENE 4: LILY BOUQUET ═══════════════════════════════ -->
 <section class="scene" id="scene-lily">
-  <!-- Falling petals injected by JS -->
-
   <h2 class="lily-title reveal">These are for you, love 🤍</h2>
 
   <div class="bouquet-svg-wrap reveal" style="transition-delay:0.2s">
     <svg viewBox="0 0 480 560" xmlns="http://www.w3.org/2000/svg" width="100%">
 
-      <!-- Ribbon / wrap -->
       <path d="M200 480 Q240 510 280 480 L300 540 Q240 560 180 540 Z" fill="#c8a96e" opacity="0.9"/>
       <path d="M220 500 Q240 515 260 500 L265 530 Q240 540 215 530 Z" fill="#e8d4a8" opacity="0.6"/>
 
-      <!-- STEMS -->
       <path d="M240 480 Q238 400 235 300" stroke="#4a7c59" stroke-width="3" fill="none" stroke-linecap="round"/>
       <path d="M240 480 Q250 420 260 340" stroke="#4a7c59" stroke-width="3" fill="none" stroke-linecap="round"/>
       <path d="M240 480 Q225 410 215 310" stroke="#4a7c59" stroke-width="2.5" fill="none" stroke-linecap="round"/>
       <path d="M240 480 Q265 430 275 360" stroke="#5a8c69" stroke-width="2" fill="none" stroke-linecap="round"/>
       <path d="M240 480 Q218 440 205 380" stroke="#5a8c69" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-      <!-- LEAVES -->
       <ellipse cx="248" cy="390" rx="22" ry="9" fill="#4a7c59" transform="rotate(-30 248 390)" opacity="0.9"/>
       <ellipse cx="228" cy="360" rx="18" ry="7" fill="#5a8c69" transform="rotate(20 228 360)" opacity="0.85"/>
       <ellipse cx="262" cy="420" rx="20" ry="8" fill="#3d6b4a" transform="rotate(-50 262 420)" opacity="0.9"/>
       <ellipse cx="215" cy="440" rx="16" ry="6" fill="#5a8c69" transform="rotate(40 215 440)" opacity="0.8"/>
 
-      <!-- ─── LILY 1 (center, upright) ─── -->
-      <!-- 6 petals around center -->
       <g transform="translate(235, 280)">
-        <!-- petals -->
         <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(0)"/>
         <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(60)"/>
         <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(120)"/>
         <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(180)"/>
         <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(240)"/>
         <ellipse cx="0" cy="-48" rx="12" ry="28" fill="white" opacity="0.95" transform="rotate(300)"/>
-        <!-- center detail -->
         <circle cx="0" cy="0" r="10" fill="#f5e6b0"/>
-        <!-- stamens -->
         <line x1="0" y1="0" x2="0" y2="-20" stroke="#c8a96e" stroke-width="1.5"/>
         <line x1="0" y1="0" x2="17" y2="-10" stroke="#c8a96e" stroke-width="1.5"/>
         <line x1="0" y1="0" x2="17" y2="10" stroke="#c8a96e" stroke-width="1.5"/>
         <line x1="0" y1="0" x2="0" y2="20" stroke="#c8a96e" stroke-width="1.5"/>
         <line x1="0" y1="0" x2="-17" y2="10" stroke="#c8a96e" stroke-width="1.5"/>
         <line x1="0" y1="0" x2="-17" y2="-10" stroke="#c8a96e" stroke-width="1.5"/>
-        <!-- pollen tips -->
         <circle cx="0" cy="-22" r="3" fill="#e8b84b"/>
         <circle cx="19" cy="-11" r="3" fill="#e8b84b"/>
         <circle cx="19" cy="11" r="3" fill="#e8b84b"/>
         <circle cx="0" cy="22" r="3" fill="#e8b84b"/>
         <circle cx="-19" cy="11" r="3" fill="#e8b84b"/>
         <circle cx="-19" cy="-11" r="3" fill="#e8b84b"/>
-        <!-- petal veins -->
         <path d="M0 0 Q0 -30 0 -60" stroke="rgba(180,210,180,0.4)" stroke-width="0.8" fill="none"/>
         <path d="M0 0 Q17 -17 35 -35" stroke="rgba(180,210,180,0.4)" stroke-width="0.8" fill="none" transform="rotate(60)"/>
       </g>
 
-      <!-- ─── LILY 2 (right, angled) ─── -->
       <g transform="translate(268, 330) rotate(-20)">
         <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(0)"/>
         <ellipse cx="0" cy="-42" rx="10" ry="24" fill="#fff8f4" opacity="0.9" transform="rotate(60)"/>
@@ -691,7 +665,6 @@
         <circle cx="-16" cy="-10" r="2.5" fill="#e8b84b"/>
       </g>
 
-      <!-- ─── LILY 3 (left, angled) ─── -->
       <g transform="translate(208, 295) rotate(15)">
         <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(0)"/>
         <ellipse cx="0" cy="-38" rx="10" ry="22" fill="white" opacity="0.92" transform="rotate(60)"/>
@@ -714,7 +687,6 @@
         <circle cx="-15" cy="-9" r="2.5" fill="#e8b84b"/>
       </g>
 
-      <!-- ─── BUD 1 ─── -->
       <g transform="translate(276, 350)">
         <ellipse cx="0" cy="-15" rx="6" ry="16" fill="white" opacity="0.85"/>
         <ellipse cx="-5" cy="-12" rx="5" ry="13" fill="white" opacity="0.7" transform="rotate(-15)"/>
@@ -722,7 +694,6 @@
         <ellipse cx="0" cy="-5" rx="8" ry="4" fill="#b8d4b8" opacity="0.5"/>
       </g>
 
-      <!-- ─── BUD 2 ─── -->
       <g transform="translate(203, 370)">
         <ellipse cx="0" cy="-12" rx="5" ry="13" fill="white" opacity="0.8"/>
         <ellipse cx="-4" cy="-10" rx="4" ry="11" fill="white" opacity="0.65" transform="rotate(-12)"/>
@@ -730,7 +701,6 @@
         <ellipse cx="0" cy="-4" rx="6" ry="3.5" fill="#b8d4b8" opacity="0.5"/>
       </g>
 
-      <!-- Sparkles -->
       <circle cx="180" cy="250" r="2" fill="#e8d4a8" opacity="0.7"><animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.5s" repeatCount="indefinite"/></circle>
       <circle cx="300" cy="230" r="1.5" fill="#e8d4a8" opacity="0.6"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="3.2s" repeatCount="indefinite"/></circle>
       <circle cx="155" cy="320" r="1.5" fill="white" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.8s" repeatCount="indefinite"/></circle>
@@ -743,11 +713,9 @@
   </p>
 </section>
 
-<!-- ═══════════════════════════════ SCENE 5: QUOTE ═══════════════════════════════ -->
 <section class="scene" id="scene-quote" style="min-height: auto; padding: 6rem 2rem 8rem;">
 
   <div class="quote-card reveal">
-    <!-- decorative leaf -->
     <svg class="quote-decorLeaf" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M10 180 Q60 20 190 10 Q80 80 10 180Z" fill="#4a7c59"/>
     </svg>
@@ -859,7 +827,8 @@ const letterText = [
   "to listen, to remind you how wonderful you are ",
   "when you forget.\n\n",
   "This morning is yours. ",
-  "Take it gently. 🌿"
+  "Take it gently. 🌿",
+  "Rindu awak jugak sangat sangat Amira. "
 ].join('');
 
 let typedIndex = 0;
